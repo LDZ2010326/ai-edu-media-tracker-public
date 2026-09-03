@@ -47,6 +47,18 @@ def test_readmes_link_languages_demo_example_and_install_routes() -> None:
     assert "README.md" in english
 
 
+def test_sample_report_has_traceable_short_entries() -> None:
+    report_path = ROOT / "examples" / "sample-report.md"
+    assert report_path.is_file(), "sample report must be published"
+    report = report_path.read_text(encoding="utf-8")
+    assert report.count("### ") >= 2
+    for field in ("来源：", "发布时间：", "抓取日期：", "短摘要：", "原文链接："):
+        assert report.count(field) >= 2
+    assert len(report.encode("utf-8")) <= 12_000
+    assert "正文内容" not in report
+    assert len(re.findall(r"https?://(?:www\.)?(?:duozhi\.com|djcapital\.net|jiemodui\.com)/", report)) >= 2
+
+
 def test_public_showcase_does_not_contain_credential_shaped_values_or_local_paths() -> None:
     checked = [ROOT / "README.md"]
     checked.extend(ROOT / path for path in REQUIRED_SHOWCASE_PATHS if (ROOT / path).is_file())

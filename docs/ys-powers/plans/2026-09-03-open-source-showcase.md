@@ -70,7 +70,7 @@ Task 1
 
 ## Task 2: 提供可核验的真实示例报告
 
-**Status:** In progress
+**Status:** Completed
 
 **Description:** 创建一份面向访客的短篇示例报告，以真实公开文章证明输出形态，同时维持版权、安全与来源可追溯边界。
 
@@ -100,6 +100,8 @@ Task 1
 **Estimated scope:** S
 
 ## Task 3: 交付三条经过验证的安装路径
+
+**Status:** In progress
 
 **Description:** 为 Claude Code Skill、Codex Skill 和 Python CLI 编写安装、最短体验与卸载说明，且只公开在干净环境中实际成功的命令。
 
