@@ -46,6 +46,10 @@ def test_readmes_link_languages_demo_example_and_install_routes() -> None:
         assert re.search(r"!\[[^\]]{8,}\]\(assets/", text)
     assert "README_EN.md" in chinese
     assert "README.md" in english
+    section_pattern = re.compile(r"<!-- section:([a-z-]+) -->")
+    assert section_pattern.findall(chinese) == section_pattern.findall(english)
+    command_pattern = re.compile(r"```bash\n(.*?)```", re.DOTALL)
+    assert command_pattern.findall(chinese) == command_pattern.findall(english)
 
 
 def test_sample_report_has_traceable_short_entries() -> None:

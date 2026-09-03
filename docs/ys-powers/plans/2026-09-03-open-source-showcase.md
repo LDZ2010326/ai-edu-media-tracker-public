@@ -174,7 +174,7 @@ Task 1
 
 ## Task 5: 重构中英文产品入口
 
-**Status:** In progress
+**Status:** Completed
 
 **Description:** 将 README 重构为产品结果优先的中文主入口，并提供结构、命令、功能和限制等价的英文版本。
 
@@ -214,6 +214,8 @@ Task 1
 - [ ] 人工审阅首屏、窄屏、图片替代文本和所有公开承诺后再补齐社区入口
 
 ## Task 6: 补齐社区贡献入口
+
+**Status:** In progress
 
 **Description:** 提供最小而完整的贡献、行为规范、Roadmap 和结构化 Issue 入口，使新用户可以报告 Bug、建议功能或反馈数据源异常。
 
