@@ -84,8 +84,11 @@ sh scripts/install-skill.sh uninstall codex
 构建并安装：
 
 ```bash
-uv tool install .
+uv tool install . --with-requirements requirements-cli.lock
 ```
+
+`requirements-cli.lock` 由 `uv export --locked --no-dev --no-emit-project --no-hashes --format
+requirements-txt` 从 `uv.lock` 生成，使用户级工具安装使用与仓库审计一致的生产依赖版本。
 
 uv 会输出工具可执行目录。请按提示将该目录加入 PATH；也可以用
 `uv tool dir --bin` 查看目录。重新启动终端及 Claude Code/Codex 后，Skill 才能在任意工作目录

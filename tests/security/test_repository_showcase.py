@@ -136,12 +136,37 @@ def test_installation_guide_has_three_verified_routes_and_uninstall_steps() -> N
     assert guide.count("### 验证") == 3
     assert guide.count("### 卸载") == 3
     assert "uv tool install ." in guide
+    assert "--with-requirements requirements-cli.lock" in guide
     assert "uv tool dir --bin" in guide
     assert "uv tool uninstall ai-edu-media-tracker" in guide
     assert "uv sync --locked" not in guide
     assert "ai-edu-media-tracker-public" not in guide
     assert "pip install ai-edu-media-tracker" not in guide
     assert "自动发布" not in guide
+
+
+def test_cli_requirements_are_exported_from_uv_lock() -> None:
+    requirements = ROOT / "requirements-cli.lock"
+    assert requirements.is_file()
+    uv = shutil.which("uv")
+    assert uv is not None
+    result = subprocess.run(  # noqa: S603 - fixed uv export command
+        [
+            uv,
+            "export",
+            "--locked",
+            "--no-dev",
+            "--no-emit-project",
+            "--no-hashes",
+            "--format",
+            "requirements-txt",
+        ],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert requirements.read_text(encoding="utf-8") == result.stdout
 
 
 def test_skill_installer_refuses_collisions_and_requires_ownership_marker(
