@@ -101,7 +101,7 @@ Task 1
 
 ## Task 3: 交付三条经过验证的安装路径
 
-**Status:** In progress
+**Status:** Completed
 
 **Description:** 为 Claude Code Skill、Codex Skill 和 Python CLI 编写安装、最短体验与卸载说明，且只公开在干净环境中实际成功的命令。
 
@@ -139,6 +139,8 @@ Task 1
 - [ ] 人工复核示例版权边界、安装命令证据和 LICENSE 标准文本后再制作视觉资产
 
 ## Task 4: 创建静态 Demo 与品牌资产
+
+**Status:** In progress
 
 **Description:** 根据同版示例报告创建报告预览、文字等价流程图、最小 Logo 和 Social Preview，使图片加载成功时增强理解、加载失败时不阻断主路径。
 

@@ -59,6 +59,19 @@ def test_sample_report_has_traceable_short_entries() -> None:
     assert len(re.findall(r"https?://(?:www\.)?(?:duozhi\.com|djcapital\.net|jiemodui\.com)/", report)) >= 2
 
 
+def test_installation_guide_has_three_verified_routes_and_uninstall_steps() -> None:
+    guide_path = ROOT / "docs" / "installation.md"
+    assert guide_path.is_file(), "installation guide must be published"
+    guide = guide_path.read_text(encoding="utf-8")
+    for heading in ("## Claude Code Skill", "## Codex Skill", "## Python CLI"):
+        assert heading in guide
+    assert guide.count("### 验证") == 3
+    assert guide.count("### 卸载") == 3
+    assert "ai-edu-media-tracker-public" not in guide
+    assert "pip install ai-edu-media-tracker" not in guide
+    assert "自动发布" not in guide
+
+
 def test_public_showcase_does_not_contain_credential_shaped_values_or_local_paths() -> None:
     checked = [ROOT / "README.md"]
     checked.extend(ROOT / path for path in REQUIRED_SHOWCASE_PATHS if (ROOT / path).is_file())
