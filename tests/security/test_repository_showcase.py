@@ -72,6 +72,10 @@ def test_community_docs_define_safe_contribution_routes() -> None:
     assert "security/advisories/new" in contribution
     assert "公开 Issue" in contribution
     assert "security/advisories/new" in conduct
+    security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+    assert "confidential community report" in conduct
+    assert "confidential community report" in security
+    assert "敏感社区事件" in conduct
     assert "TODO" not in conduct
     for heading in ("## 近期方向", "## 未来探索", "## 明确非目标"):
         assert heading in roadmap

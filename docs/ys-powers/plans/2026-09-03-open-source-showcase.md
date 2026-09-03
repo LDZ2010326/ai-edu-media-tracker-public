@@ -399,7 +399,7 @@ Task 1
 
 ## Task 12: 提供社区事件私密报告路径
 
-**Status:** In progress
+**Status:** Completed
 
 **Description:** 将骚扰、隐私或其他敏感社区事件明确分流到现有私密渠道，避免要求在公开
 Issue 或 PR 披露；不发布未经用户授权的个人邮箱。

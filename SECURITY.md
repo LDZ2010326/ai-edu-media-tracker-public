@@ -24,4 +24,9 @@ Publication requires a fresh `ValidatedArtifact`, an absolute executable `LARK_C
 
 Use this repository's **Security** tab and GitHub Security Advisories “Report a vulnerability” flow for a private report; do not open a public issue first. Repository maintainers must enable private vulnerability reporting before public launch. Until that control is enabled, do not claim that a private reporting channel is available. Do not include credentials, cookies, authentication material, private artifacts, personal paths, or raw production logs in an issue.
 
+The same private form also accepts a sensitive Code of Conduct report. Prefix its title with
+`confidential community report`; maintainers will handle it as a confidential community matter,
+not require the reporter to characterize it as a software vulnerability. Non-sensitive community
+feedback may remain in a public issue or pull request.
+
 Maintainers target acknowledgement within 3 business days, an initial assessment within 7 business days, and coordinated remediation timelines based on severity. These are response targets, not guaranteed service levels.

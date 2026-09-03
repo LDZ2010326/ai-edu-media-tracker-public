@@ -17,6 +17,10 @@
 
 维护者可以编辑或移除不当内容，并根据情节作出警告、临时限制或永久禁止参与的决定。处理时会尽量保护报告者隐私，并避免利益冲突。
 
-一般行为问题可通过相关 Issue 或 Pull Request 联系维护者；涉及漏洞、凭证、隐私或其他敏感材料时，请勿公开披露，改用 GitHub Private Vulnerability Reporting：<https://github.com/LDZ2010326/ai-edu-media-tracker/security/advisories/new>。
+不含个人或敏感信息的一般行为问题可以通过相关 Issue 或 Pull Request 联系维护者。骚扰、隐私、
+利益冲突或其他敏感社区事件不得公开披露；请使用 GitHub Private Vulnerability Reporting：
+<https://github.com/LDZ2010326/ai-edu-media-tracker/security/advisories/new>，并在标题开头标注
+`confidential community report`。维护者会把它作为私密社区报告处理，而不是要求报告者将事件
+描述成软件漏洞。
 
 本规范参考 [Contributor Covenant 2.1](https://www.contributor-covenant.org/version/2/1/code_of_conduct/)，并针对本项目的公开数据与安全边界做了简化。
