@@ -515,6 +515,29 @@ Issue 或 PR 披露；不发布未经用户授权的个人邮箱。
 
 **Dependencies:** Task 15
 
+## Task 17: 以 Git blob 扫描当前 tracked symlink
+
+**Status:** Completed
+
+**Description:** 修复 current-tree 扫描通过文件系统跟随 tracked symlink，导致越出 checkout、
+读取特殊文件、挂起或因悬空链接崩溃的问题。
+
+**Files:**
+- Modify: `scripts/scan-public-secrets.py`
+- Modify: `tests/security/test_repository_showcase.py`
+
+**Acceptance criteria:**
+- [ ] 当前 tracked 内容从 Git index blob 读取，不跟随工作区 symlink。
+- [ ] 悬空 symlink 的 blob 内容可以被扫描并形成受控 finding，不出现 traceback。
+- [ ] 普通 tracked 文件和完整历史行为保持一致。
+
+**Verification:**
+- [ ] RED: 临时仓库加入含凭证形态目标文本的悬空 symlink 后当前扫描器 traceback。
+- [ ] GREEN: current/history 均报告 symlink 路径且不回显值、不跟随目标。
+- [ ] Regression: 完整门禁通过。
+
+**Dependencies:** Task 16
+
 ## Checkpoint: 公开发布完成
 
 - [ ] Task 8 的全部验收标准通过

@@ -330,7 +330,15 @@ def test_secret_scanner_covers_git_history_without_echoing_values(tmp_path: Path
     disguised_binary = tmp_path / "tests" / "fixtures" / "leak.png"
     disguised_binary.parent.mkdir(parents=True)
     disguised_binary.write_bytes(b"\x00binary\x00" + secret_value.encode())
-    run_git("add", "README.md", "tests/contract/test_cli.py", "tests/fixtures/leak.png")
+    dangling_link = tmp_path / "leak-link"
+    dangling_link.symlink_to(secret_value)
+    run_git(
+        "add",
+        "README.md",
+        "tests/contract/test_cli.py",
+        "tests/fixtures/leak.png",
+        "leak-link",
+    )
     run_git("commit", "-qm", "leak")
 
     result = subprocess.run(  # noqa: S603 - fixed interpreter, scanner, and temp repo
@@ -343,6 +351,8 @@ def test_secret_scanner_covers_git_history_without_echoing_values(tmp_path: Path
     assert "README.md" in result.stderr
     assert "tests/contract/test_cli.py" in result.stderr
     assert "tests/fixtures/leak.png" in result.stderr
+    assert "leak-link" in result.stderr
+    assert "Traceback" not in result.stderr
     assert secret_value not in result.stdout + result.stderr
 
 

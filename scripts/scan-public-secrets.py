@@ -41,12 +41,14 @@ def _git(git: str, repo: Path, *arguments: str) -> bytes:
 
 def _current_findings(git: str, repo: Path) -> list[str]:
     findings: list[str] = []
-    for raw_path in _git(git, repo, "ls-files", "-z").split(b"\0"):
-        if not raw_path:
+    for entry in _git(git, repo, "ls-files", "-s", "-z").split(b"\0"):
+        if not entry:
             continue
+        metadata, raw_path = entry.split(b"\t", 1)
+        blob = metadata.split()[1].decode()
         path = raw_path.decode("utf-8", errors="surrogateescape")
-        if _has_secret(path, (repo / path).read_bytes()):
-            findings.append(f"working tree: {path}")
+        if _has_secret(path, _git(git, repo, "cat-file", "blob", blob)):
+            findings.append(f"index blob {blob[:12]}: {path}")
     return findings
 
 
