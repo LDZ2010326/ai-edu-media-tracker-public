@@ -19,7 +19,7 @@
 
 不含个人或敏感信息的一般行为问题可以通过相关 Issue 或 Pull Request 联系维护者。骚扰、隐私、
 利益冲突或其他敏感社区事件不得公开披露；请使用 GitHub Private Vulnerability Reporting：
-<https://github.com/LDZ2010326/ai-edu-media-tracker/security/advisories/new>，并在标题开头标注
+<https://github.com/LDZ2010326/ai-edu-media-tracker-public/security/advisories/new>，并在标题开头标注
 `confidential community report`。维护者会把它作为私密社区报告处理，而不是要求报告者将事件
 描述成软件漏洞。
 

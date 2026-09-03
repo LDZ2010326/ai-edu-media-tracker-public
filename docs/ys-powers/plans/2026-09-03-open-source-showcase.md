@@ -538,6 +538,35 @@ Issue 或 PR 披露；不发布未经用户授权的个人邮箱。
 
 **Dependencies:** Task 16
 
+## Task 18: 在仓库重命名前保持公开链接可用
+
+**Status:** Completed
+
+**Description:** 修复展示文档、安装命令、徽章和私密报告入口提前引用尚未完成的
+`ai-edu-media-tracker` 仓库名而产生 404 的问题。当前分支统一引用现有公开仓库
+`ai-edu-media-tracker-public`；实际完成 Task 8 的仓库重命名后再原子切换 URL。
+
+**Files:**
+- Modify: `README.md`
+- Modify: `README_EN.md`
+- Modify: `CONTRIBUTING.md`
+- Modify: `CODE_OF_CONDUCT.md`
+- Modify: `docs/installation.md`
+- Modify: `.github/ISSUE_TEMPLATE/config.yml`
+- Modify: `tests/security/test_repository_showcase.py`
+
+**Acceptance criteria:**
+- [x] 当前 Clone、徽章、社区与私密报告 URL 均指向可访问的现有仓库名。
+- [x] 当前公开文件不提前引用尚未创建的目标仓库 URL。
+- [x] 仓库重命名仍保留在 Task 8，不能由文档变更冒充完成。
+
+**Verification:**
+- [x] RED: 新契约测试在提前使用目标仓库名时失败。
+- [x] GREEN: URL 契约与完整测试通过。
+- [x] Regression: 完整门禁通过。
+
+**Dependencies:** Task 17
+
 ## Checkpoint: 公开发布完成
 
 - [ ] Task 8 的全部验收标准通过

@@ -2,10 +2,10 @@
 
 [English](README_EN.md) · 本地优先 · 证据可追溯 · Apache-2.0
 
-[![CI](https://github.com/LDZ2010326/ai-edu-media-tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/LDZ2010326/ai-edu-media-tracker/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/LDZ2010326/ai-edu-media-tracker/actions/workflows/codeql.yml/badge.svg)](https://github.com/LDZ2010326/ai-edu-media-tracker/actions/workflows/codeql.yml)
-[![Release](https://img.shields.io/github/v/release/LDZ2010326/ai-edu-media-tracker)](https://github.com/LDZ2010326/ai-edu-media-tracker/releases)
-[![License](https://img.shields.io/github/license/LDZ2010326/ai-edu-media-tracker)](LICENSE)
+[![CI](https://github.com/LDZ2010326/ai-edu-media-tracker-public/actions/workflows/ci.yml/badge.svg)](https://github.com/LDZ2010326/ai-edu-media-tracker-public/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/LDZ2010326/ai-edu-media-tracker-public/actions/workflows/codeql.yml/badge.svg)](https://github.com/LDZ2010326/ai-edu-media-tracker-public/actions/workflows/codeql.yml)
+[![Release](https://img.shields.io/github/v/release/LDZ2010326/ai-edu-media-tracker-public)](https://github.com/LDZ2010326/ai-edu-media-tracker-public/releases)
+[![License](https://img.shields.io/github/license/LDZ2010326/ai-edu-media-tracker-public)](LICENSE)
 
 把多知、多鲸、芥末堆的公开资讯整理成可核验、带来源的 AI 教育产品情报简报。先看结果，再选择 Claude Code Skill、Codex Skill 或 Python CLI。
 
@@ -26,7 +26,7 @@
 | Python CLI | 希望直接控制抓取、验证与输出 | [安装 Python CLI](docs/installation.md#python-cli) |
 
 ```bash
-git clone https://github.com/LDZ2010326/ai-edu-media-tracker.git
+git clone https://github.com/LDZ2010326/ai-edu-media-tracker-public.git
 cd ai-edu-media-tracker
 uv sync --locked
 uv run ai-edu-tracker doctor

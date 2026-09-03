@@ -140,9 +140,26 @@ def test_installation_guide_has_three_verified_routes_and_uninstall_steps() -> N
     assert "uv tool dir --bin" in guide
     assert "uv tool uninstall ai-edu-media-tracker" in guide
     assert "uv sync --locked" not in guide
-    assert "ai-edu-media-tracker-public" not in guide
+    assert "github.com/LDZ2010326/ai-edu-media-tracker-public" in guide
     assert "pip install ai-edu-media-tracker" not in guide
     assert "自动发布" not in guide
+
+
+def test_public_links_use_the_current_repository_slug() -> None:
+    current_repo = "github.com/LDZ2010326/ai-edu-media-tracker-public"
+    future_repo = "github.com/LDZ2010326/ai-edu-media-tracker/"
+    public_files = (
+        ROOT / "README.md",
+        ROOT / "README_EN.md",
+        ROOT / "CONTRIBUTING.md",
+        ROOT / "CODE_OF_CONDUCT.md",
+        ROOT / "docs" / "installation.md",
+        ROOT / ".github" / "ISSUE_TEMPLATE" / "config.yml",
+    )
+    for path in public_files:
+        content = path.read_text(encoding="utf-8")
+        assert current_repo in content, f"{path} must link to the current public repository"
+        assert future_repo not in content, f"{path} must not anticipate an unfinished rename"
 
 
 def test_cli_requirements_are_exported_from_uv_lock() -> None:

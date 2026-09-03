@@ -7,7 +7,7 @@
 需要 Python 3.12+ 与 [uv](https://docs.astral.sh/uv/)。
 
 ```bash
-git clone https://github.com/LDZ2010326/ai-edu-media-tracker.git
+git clone https://github.com/LDZ2010326/ai-edu-media-tracker-public.git
 cd ai-edu-media-tracker
 uv sync --locked
 uv run --extra dev pytest -q
@@ -27,6 +27,6 @@ uv run --extra dev pytest -q
 - 可复现的软件问题：使用 Bug 表单。
 - 新能力建议：使用功能建议表单。
 - 公开数据源失效或解析异常：使用数据源异常表单，仅提供公开 URL，不粘贴整篇正文、Cookie 或凭证。
-- 安全漏洞：不要创建公开 Issue。请使用 GitHub **Private Vulnerability Reporting**：<https://github.com/LDZ2010326/ai-edu-media-tracker/security/advisories/new>。
+- 安全漏洞：不要创建公开 Issue。请使用 GitHub **Private Vulnerability Reporting**：<https://github.com/LDZ2010326/ai-edu-media-tracker-public/security/advisories/new>。
 
 提交贡献即表示你同意遵守 [社区行为规范](CODE_OF_CONDUCT.md)。

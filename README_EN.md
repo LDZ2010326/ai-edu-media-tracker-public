@@ -2,10 +2,10 @@
 
 [中文](README.md) · Local-first · Evidence-bound · Apache-2.0
 
-[![CI](https://github.com/LDZ2010326/ai-edu-media-tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/LDZ2010326/ai-edu-media-tracker/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/LDZ2010326/ai-edu-media-tracker/actions/workflows/codeql.yml/badge.svg)](https://github.com/LDZ2010326/ai-edu-media-tracker/actions/workflows/codeql.yml)
-[![Release](https://img.shields.io/github/v/release/LDZ2010326/ai-edu-media-tracker)](https://github.com/LDZ2010326/ai-edu-media-tracker/releases)
-[![License](https://img.shields.io/github/license/LDZ2010326/ai-edu-media-tracker)](LICENSE)
+[![CI](https://github.com/LDZ2010326/ai-edu-media-tracker-public/actions/workflows/ci.yml/badge.svg)](https://github.com/LDZ2010326/ai-edu-media-tracker-public/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/LDZ2010326/ai-edu-media-tracker-public/actions/workflows/codeql.yml/badge.svg)](https://github.com/LDZ2010326/ai-edu-media-tracker-public/actions/workflows/codeql.yml)
+[![Release](https://img.shields.io/github/v/release/LDZ2010326/ai-edu-media-tracker-public)](https://github.com/LDZ2010326/ai-edu-media-tracker-public/releases)
+[![License](https://img.shields.io/github/license/LDZ2010326/ai-edu-media-tracker-public)](LICENSE)
 
 Turn public updates from Duozhi, Duojing, and Jiemodui into verifiable AI-education product briefs with traceable sources. See the result first, then choose the Claude Code Skill, Codex Skill, or Python CLI.
 
@@ -26,7 +26,7 @@ Turn public updates from Duozhi, Duojing, and Jiemodui into verifiable AI-educat
 | Python CLI | Direct control over collection, validation, and output | [Install the Python CLI](docs/installation.md#python-cli) |
 
 ```bash
-git clone https://github.com/LDZ2010326/ai-edu-media-tracker.git
+git clone https://github.com/LDZ2010326/ai-edu-media-tracker-public.git
 cd ai-edu-media-tracker
 uv sync --locked
 uv run ai-edu-tracker doctor
