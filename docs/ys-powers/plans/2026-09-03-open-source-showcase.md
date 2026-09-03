@@ -325,6 +325,100 @@ Task 1
 
 **Estimated scope:** M
 
+## Task 9: 修复 Skill 与 CLI 的端到端安装契约
+
+**Status:** Completed
+
+**Description:** 修复 `uv sync` 仅将命令放入项目虚拟环境、而已安装 Skill 在任意目录调用裸
+`ai-edu-tracker` 导致退出 127 的问题。
+
+**Files:**
+- Modify: `docs/installation.md`
+- Modify: `tests/security/test_repository_showcase.py`
+
+**Acceptance criteria:**
+- [ ] CLI 使用 `uv tool install .` 安装为用户工具，不声称已发布到 PyPI。
+- [ ] 文档说明并验证 `uv tool dir --bin` 的 PATH 前置条件。
+- [ ] 从项目目录外调用裸 `ai-edu-tracker doctor` 成功，与两个 Skill 的实际命令一致。
+- [ ] CLI 卸载使用 `uv tool uninstall ai-edu-media-tracker`。
+
+**Verification:**
+- [ ] RED: 端到端测试证明当前裸 CLI 不可用。
+- [ ] GREEN: 在隔离的 `UV_TOOL_DIR`、`UV_TOOL_BIN_DIR` 和 `HOME` 下完成安装、项目外验证与卸载。
+- [ ] Regression: `uv run --extra dev pytest -q tests/security/test_repository_showcase.py`。
+
+**Dependencies:** Task 3
+
+## Task 10: 防止 Skill 安装覆盖和卸载误删
+
+**Status:** In progress
+
+**Description:** 为 Claude Code 与 Codex 的复制安装加入同名目录冲突拒绝和 ownership marker，
+卸载仅在 marker 与 Skill 名称同时匹配时执行。
+
+**Files:**
+- Modify: `docs/installation.md`
+- Modify: `tests/security/test_repository_showcase.py`
+
+**Acceptance criteria:**
+- [ ] 已存在同名目录时安装失败且原文件保持不变。
+- [ ] 新安装写入项目专用 ownership marker。
+- [ ] 缺失 marker 或 Skill 名称不匹配时卸载失败且目录保持不变。
+- [ ] 正常安装后的卸载只删除该固定 Skill 目录。
+
+**Verification:**
+- [ ] RED: 当前命令覆盖既有目录且无 ownership 验证。
+- [ ] GREEN: 在隔离 HOME 中执行两套文档命令，覆盖拒绝、误删拒绝与正常卸载均符合预期。
+- [ ] Regression: `uv run --extra dev pytest -q tests/security/test_repository_showcase.py`。
+
+**Dependencies:** Task 9
+
+## Task 11: 扩大公开文件与 Git 历史敏感信息门禁
+
+**Status:** Pending
+
+**Description:** 修复敏感信息测试仅扫描固定展示清单、遗漏 PR 模板、Spec、Plan 与 Git 历史的问题。
+
+**Files:**
+- Modify: `tests/security/test_repository_showcase.py`
+- Modify: `.github/workflows/ci.yml`
+
+**Acceptance criteria:**
+- [ ] 当前检出的全部公开文本文件进入扫描，测试夹具的刻意攻击样例使用明确排除规则。
+- [ ] CI 以完整历史检出，并扫描所有可达提交中的凭证形态与个人绝对路径。
+- [ ] 扫描不输出匹配到的秘密值，只报告文件或提交标识。
+
+**Verification:**
+- [ ] RED: 临时公开文本或历史 fixture 中的凭证形态使门禁失败。
+- [ ] GREEN: 当前树和可达历史扫描通过。
+- [ ] Regression: 仓库安全测试、workflow 权限测试与 `git diff --check` 通过。
+
+**Dependencies:** Task 10
+
+## Task 12: 提供社区事件私密报告路径
+
+**Status:** Pending
+
+**Description:** 将骚扰、隐私或其他敏感社区事件明确分流到现有私密渠道，避免要求在公开
+Issue 或 PR 披露；不发布未经用户授权的个人邮箱。
+
+**Files:**
+- Modify: `CODE_OF_CONDUCT.md`
+- Modify: `SECURITY.md`
+- Modify: `tests/security/test_repository_showcase.py`
+
+**Acceptance criteria:**
+- [ ] 非敏感行为问题可以公开反馈，敏感社区事件明确使用私密报告渠道。
+- [ ] 私密渠道明确接受 confidential community report，不将其误描述成漏洞。
+- [ ] 不新增个人邮箱、凭证或外部服务。
+
+**Verification:**
+- [ ] RED: 当前社区文档没有 confidential community report 契约。
+- [ ] GREEN: 社区与安全文档测试通过。
+- [ ] Regression: 完整测试、Ruff、Mypy、Bandit、pip-audit、build 与 diff check 通过。
+
+**Dependencies:** Task 11
+
 ## Checkpoint: 公开发布完成
 
 - [ ] Task 8 的全部验收标准通过

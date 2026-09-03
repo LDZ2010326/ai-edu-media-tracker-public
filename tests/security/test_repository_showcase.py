@@ -127,6 +127,10 @@ def test_installation_guide_has_three_verified_routes_and_uninstall_steps() -> N
         assert heading in guide
     assert guide.count("### 验证") == 3
     assert guide.count("### 卸载") == 3
+    assert "uv tool install ." in guide
+    assert "uv tool dir --bin" in guide
+    assert "uv tool uninstall ai-edu-media-tracker" in guide
+    assert "uv sync --locked" not in guide
     assert "ai-edu-media-tracker-public" not in guide
     assert "pip install ai-edu-media-tracker" not in guide
     assert "自动发布" not in guide
