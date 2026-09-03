@@ -4,8 +4,10 @@ from __future__ import annotations
 
 import os
 import re
+import shutil
 import struct
 import subprocess
+import sys
 from hashlib import sha256
 from pathlib import Path
 
@@ -241,6 +243,40 @@ def test_public_showcase_does_not_contain_credential_shaped_values_or_local_path
     )
     for pattern in forbidden:
         assert re.search(pattern, content, flags=re.IGNORECASE) is None
+
+
+def test_secret_scanner_covers_git_history_without_echoing_values(tmp_path: Path) -> None:
+    scanner = ROOT / "scripts" / "scan-public-secrets.py"
+    assert scanner.is_file(), "repository and history scanning must use a shared release gate"
+    git = shutil.which("git")
+    assert git is not None
+
+    def run_git(*arguments: str) -> None:
+        subprocess.run(  # noqa: S603 - resolved git executable and fixed test arguments
+            [git, "-C", str(tmp_path), *arguments], check=True, capture_output=True
+        )
+
+    run_git("init", "-q")
+    run_git("config", "user.email", "test@example.invalid")
+    run_git("config", "user.name", "Test")
+    readme = tmp_path / "README.md"
+    readme.write_text("clean\n", encoding="utf-8")
+    run_git("add", "README.md")
+    run_git("commit", "-qm", "clean")
+    secret_value = "api" + "_key = " + ("A" * 24)
+    readme.write_text(secret_value + "\n", encoding="utf-8")
+    run_git("add", "README.md")
+    run_git("commit", "-qm", "leak")
+
+    result = subprocess.run(  # noqa: S603 - fixed interpreter, scanner, and temp repo
+        [sys.executable, str(scanner), "--repo", str(tmp_path), "--history"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 1
+    assert "README.md" in result.stderr
+    assert secret_value not in result.stdout + result.stderr
 
 
 def test_license_is_complete_apache_2_text() -> None:

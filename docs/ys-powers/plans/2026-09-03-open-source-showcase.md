@@ -376,11 +376,12 @@ Task 1
 
 ## Task 11: 扩大公开文件与 Git 历史敏感信息门禁
 
-**Status:** In progress
+**Status:** Completed
 
 **Description:** 修复敏感信息测试仅扫描固定展示清单、遗漏 PR 模板、Spec、Plan 与 Git 历史的问题。
 
 **Files:**
+- Create: `scripts/scan-public-secrets.py`
 - Modify: `tests/security/test_repository_showcase.py`
 - Modify: `.github/workflows/ci.yml`
 
@@ -398,7 +399,7 @@ Task 1
 
 ## Task 12: 提供社区事件私密报告路径
 
-**Status:** Pending
+**Status:** In progress
 
 **Description:** 将骚扰、隐私或其他敏感社区事件明确分流到现有私密渠道，避免要求在公开
 Issue 或 PR 披露；不发布未经用户授权的个人邮箱。
