@@ -567,6 +567,31 @@ Issue 或 PR 披露；不发布未经用户授权的个人邮箱。
 
 **Dependencies:** Task 17
 
+## Task 19: 固定 Clone 后的检出目录名
+
+**Status:** Completed
+
+**Description:** 当前仓库名带 `-public`，而后续安装命令进入不带后缀的目录。通过为
+`git clone` 显式指定本地目标目录，保证当前仓库 URL 与未来重命名后的安装流程一致。
+
+**Files:**
+- Modify: `README.md`
+- Modify: `README_EN.md`
+- Modify: `CONTRIBUTING.md`
+- Modify: `docs/installation.md`
+- Modify: `tests/security/test_repository_showcase.py`
+
+**Acceptance criteria:**
+- [x] 所有公开安装路径显式把仓库检出到 `ai-edu-media-tracker`。
+- [x] 紧随其后的 `cd ai-edu-media-tracker` 可成功执行。
+
+**Verification:**
+- [x] RED: 契约测试证明默认 Clone 目录与后续 `cd` 不一致。
+- [x] GREEN: 所有 Clone 命令和后续目录一致。
+- [x] Regression: 完整门禁通过。
+
+**Dependencies:** Task 18
+
 ## Checkpoint: 公开发布完成
 
 - [ ] Task 8 的全部验收标准通过

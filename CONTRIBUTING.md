@@ -7,7 +7,7 @@
 需要 Python 3.12+ 与 [uv](https://docs.astral.sh/uv/)。
 
 ```bash
-git clone https://github.com/LDZ2010326/ai-edu-media-tracker-public.git
+git clone https://github.com/LDZ2010326/ai-edu-media-tracker-public.git ai-edu-media-tracker
 cd ai-edu-media-tracker
 uv sync --locked
 uv run --extra dev pytest -q

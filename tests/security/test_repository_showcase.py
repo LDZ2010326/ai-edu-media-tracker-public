@@ -162,6 +162,22 @@ def test_public_links_use_the_current_repository_slug() -> None:
         assert future_repo not in content, f"{path} must not anticipate an unfinished rename"
 
 
+def test_clone_commands_name_the_checkout_directory_explicitly() -> None:
+    clone_command = (
+        "git clone https://github.com/LDZ2010326/ai-edu-media-tracker-public.git "
+        "ai-edu-media-tracker"
+    )
+    for path in (
+        ROOT / "README.md",
+        ROOT / "README_EN.md",
+        ROOT / "CONTRIBUTING.md",
+        ROOT / "docs" / "installation.md",
+    ):
+        content = path.read_text(encoding="utf-8")
+        assert clone_command in content
+        assert "cd ai-edu-media-tracker" in content
+
+
 def test_cli_requirements_are_exported_from_uv_lock() -> None:
     requirements = ROOT / "requirements-cli.lock"
     assert requirements.is_file()

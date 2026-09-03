@@ -26,7 +26,7 @@ Turn public updates from Duozhi, Duojing, and Jiemodui into verifiable AI-educat
 | Python CLI | Direct control over collection, validation, and output | [Install the Python CLI](docs/installation.md#python-cli) |
 
 ```bash
-git clone https://github.com/LDZ2010326/ai-edu-media-tracker-public.git
+git clone https://github.com/LDZ2010326/ai-edu-media-tracker-public.git ai-edu-media-tracker
 cd ai-edu-media-tracker
 uv sync --locked
 uv run ai-edu-tracker doctor

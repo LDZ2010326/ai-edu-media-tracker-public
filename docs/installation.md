@@ -12,7 +12,7 @@
 先取得项目源码：
 
 ```bash
-git clone https://github.com/LDZ2010326/ai-edu-media-tracker-public.git
+git clone https://github.com/LDZ2010326/ai-edu-media-tracker-public.git ai-edu-media-tracker
 cd ai-edu-media-tracker
 ```
 
