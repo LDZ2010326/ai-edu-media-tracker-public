@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import os
 import re
 import struct
+import subprocess
 from hashlib import sha256
 from pathlib import Path
 
@@ -134,6 +136,66 @@ def test_installation_guide_has_three_verified_routes_and_uninstall_steps() -> N
     assert "ai-edu-media-tracker-public" not in guide
     assert "pip install ai-edu-media-tracker" not in guide
     assert "自动发布" not in guide
+
+
+def test_skill_installer_refuses_collisions_and_requires_ownership_marker(
+    tmp_path: Path,
+) -> None:
+    installer = ROOT / "scripts" / "install-skill.sh"
+    assert installer.is_file(), "a shared safe installer must back both documented skill routes"
+    environment = {**os.environ, "HOME": str(tmp_path)}
+
+    for host, parent in (("claude", ".claude"), ("codex", ".codex")):
+        target = tmp_path / parent / "skills" / "ai-edu-media-tracker"
+        target.mkdir(parents=True)
+        sentinel = target / "user-owned.txt"
+        sentinel.write_text("keep", encoding="utf-8")
+
+        collision = subprocess.run(  # noqa: S603 - fixed repository script and host enum
+            ["/bin/sh", str(installer), "install", host],
+            cwd=ROOT,
+            env=environment,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        assert collision.returncode != 0
+        assert sentinel.read_text(encoding="utf-8") == "keep"
+
+        sentinel.unlink()
+        target.rmdir()
+        subprocess.run(  # noqa: S603 - fixed repository script and host enum
+            ["/bin/sh", str(installer), "install", host],
+            cwd=ROOT,
+            env=environment,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        marker = target / ".ai-edu-media-tracker-install"
+        assert marker.read_text(encoding="utf-8").strip() == "ai-edu-media-tracker:v1"
+
+        marker.unlink()
+        refused = subprocess.run(  # noqa: S603 - fixed repository script and host enum
+            ["/bin/sh", str(installer), "uninstall", host],
+            cwd=ROOT,
+            env=environment,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        assert refused.returncode != 0
+        assert target.is_dir()
+        marker.write_text("ai-edu-media-tracker:v1\n", encoding="utf-8")
+        subprocess.run(  # noqa: S603 - fixed repository script and host enum
+            ["/bin/sh", str(installer), "uninstall", host],
+            cwd=ROOT,
+            env=environment,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        assert not target.exists()
 
 
 def test_assets_have_expected_dimensions_and_no_remote_dependencies() -> None:

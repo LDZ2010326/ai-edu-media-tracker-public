@@ -23,9 +23,10 @@ cd ai-edu-media-tracker
 ### 安装
 
 ```bash
-mkdir -p "$HOME/.claude/skills/ai-edu-media-tracker"
-cp -R skills/claude/. "$HOME/.claude/skills/ai-edu-media-tracker/"
+sh scripts/install-skill.sh install claude
 ```
+
+安装器拒绝覆盖已有同名路径，并写入项目专用 ownership marker，供安全卸载时核验。
 
 ### 验证
 
@@ -39,7 +40,7 @@ test -s "$HOME/.claude/skills/ai-edu-media-tracker/SKILL.md"
 ### 卸载
 
 ```bash
-rm -rf "$HOME/.claude/skills/ai-edu-media-tracker"
+sh scripts/install-skill.sh uninstall claude
 ```
 
 该命令只删除此 Skill 的固定目录，不删除项目源码、证据文件或 Claude Code 的其他配置。
@@ -49,9 +50,10 @@ rm -rf "$HOME/.claude/skills/ai-edu-media-tracker"
 ### 安装
 
 ```bash
-mkdir -p "$HOME/.codex/skills/ai-edu-media-tracker"
-cp -R skills/codex/. "$HOME/.codex/skills/ai-edu-media-tracker/"
+sh scripts/install-skill.sh install codex
 ```
+
+安装器拒绝覆盖已有同名路径，并写入项目专用 ownership marker，供安全卸载时核验。
 
 如果你显式配置了自定义 Codex home，请把上述 `$HOME/.codex` 替换为该目录；不要同时维护两份
 Skill，以免加载旧版本。
@@ -68,7 +70,7 @@ test -s "$HOME/.codex/skills/ai-edu-media-tracker/SKILL.md"
 ### 卸载
 
 ```bash
-rm -rf "$HOME/.codex/skills/ai-edu-media-tracker"
+sh scripts/install-skill.sh uninstall codex
 ```
 
 该命令只删除此 Skill 的固定目录，不删除项目源码、证据文件或 Codex 的其他配置。

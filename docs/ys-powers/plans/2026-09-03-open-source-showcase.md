@@ -351,12 +351,13 @@ Task 1
 
 ## Task 10: 防止 Skill 安装覆盖和卸载误删
 
-**Status:** In progress
+**Status:** Completed
 
 **Description:** 为 Claude Code 与 Codex 的复制安装加入同名目录冲突拒绝和 ownership marker，
 卸载仅在 marker 与 Skill 名称同时匹配时执行。
 
 **Files:**
+- Create: `scripts/install-skill.sh`
 - Modify: `docs/installation.md`
 - Modify: `tests/security/test_repository_showcase.py`
 
@@ -375,7 +376,7 @@ Task 1
 
 ## Task 11: 扩大公开文件与 Git 历史敏感信息门禁
 
-**Status:** Pending
+**Status:** In progress
 
 **Description:** 修复敏感信息测试仅扫描固定展示清单、遗漏 PR 模板、Spec、Plan 与 Git 历史的问题。
 
