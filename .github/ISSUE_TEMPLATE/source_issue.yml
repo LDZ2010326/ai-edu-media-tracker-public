@@ -1,0 +1,51 @@
+name: 数据源异常
+description: 报告受支持公开媒体的抓取、日期或解析问题
+title: "[Source] "
+labels:
+  - source
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        只提交公开可访问的信息。请勿粘贴正文、Cookie 或凭证，也不要上传本地证据包和日志。
+  - type: dropdown
+    id: source_id
+    attributes:
+      label: source ID
+      description: 发生异常的固定数据源。
+      options:
+        - duozhi
+        - duojing
+        - jiemodui
+    validations:
+      required: true
+  - type: input
+    id: public_url
+    attributes:
+      label: 公开 URL
+      description: 可由维护者公开访问的文章或列表页地址。
+      placeholder: https://example.com/public-article
+    validations:
+      required: true
+  - type: input
+    id: observed_date
+    attributes:
+      label: 观察日期
+      description: 使用 YYYY-MM-DD 和所在时区。
+      placeholder: YYYY-MM-DD Asia/Shanghai
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+      description: 描述错误类型或缺失字段即可，不要粘贴完整响应。
+    validations:
+      required: true

@@ -7,6 +7,8 @@ import struct
 from hashlib import sha256
 from pathlib import Path
 
+import yaml
+
 ROOT = Path(__file__).parents[2]
 
 REQUIRED_SHOWCASE_PATHS = (
@@ -72,6 +74,37 @@ def test_community_docs_define_safe_contribution_routes() -> None:
     assert re.search(r"\b20\d{2}[-/]\d{1,2}[-/]\d{1,2}\b", roadmap) is None
     for item in ("测试证据", "文档", "安全影响", "来源与版权"):
         assert item in pull_request
+
+
+def test_issue_templates_are_structured_and_route_security_privately() -> None:
+    template_dir = ROOT / ".github" / "ISSUE_TEMPLATE"
+    forms = [
+        yaml.safe_load((template_dir / filename).read_text(encoding="utf-8"))
+        for filename in ("bug_report.yml", "feature_request.yml", "source_issue.yml")
+    ]
+    assert len({form["name"] for form in forms}) == 3
+    for form in forms:
+        assert form["description"].strip()
+        assert form["labels"]
+        required_fields = [
+            item
+            for item in form["body"]
+            if item.get("validations", {}).get("required") is True
+        ]
+        assert len(required_fields) >= 2
+
+    source_form = forms[2]
+    source_text = str(source_form)
+    for field in ("source ID", "公开 URL", "观察日期", "预期行为", "实际行为"):
+        assert field in source_text
+    for forbidden in ("粘贴正文", "Cookie", "凭证"):
+        assert forbidden in source_text
+
+    config = yaml.safe_load((template_dir / "config.yml").read_text(encoding="utf-8"))
+    assert config["blank_issues_enabled"] is False
+    contact_urls = [link["about"] + link["url"] for link in config["contact_links"]]
+    assert any("Private Vulnerability Reporting" in item for item in contact_urls)
+    assert any("security/advisories/new" in item for item in contact_urls)
 
 
 def test_sample_report_has_traceable_short_entries() -> None:

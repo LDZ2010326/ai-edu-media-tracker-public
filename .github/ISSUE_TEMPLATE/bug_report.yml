@@ -1,0 +1,45 @@
+name: Bug 报告
+description: 报告可复现的软件行为异常
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。若问题涉及漏洞、凭证或隐私，请停止填写并使用 Private Vulnerability Reporting。
+  - type: textarea
+    id: observed
+    attributes:
+      label: 实际行为
+      description: 请说明发生了什么，并对日志中的凭证、Cookie、个人路径和隐私数据脱敏。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+      description: 请说明你认为应该发生什么。
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 最小复现步骤
+      description: 请提供最小命令和输入条件，不要上传证据包或私密配置。
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 版本或提交
+      placeholder: 例如 v0.1.0 或提交短 SHA
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 环境
+      placeholder: 例如 Python 3.12 / macOS
+    validations:
+      required: true

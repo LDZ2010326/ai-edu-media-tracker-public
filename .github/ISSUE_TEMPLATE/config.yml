@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Private Vulnerability Reporting
+    url: https://github.com/LDZ2010326/ai-edu-media-tracker/security/advisories/new
+    about: 安全漏洞、凭证泄露或隐私问题请通过 Private Vulnerability Reporting 私密提交。

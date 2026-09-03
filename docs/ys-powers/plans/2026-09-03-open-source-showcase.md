@@ -249,7 +249,7 @@ Task 1
 
 ## Task 7: 提供结构化 Issue 表单并完成本地发布候选验收
 
-**Status:** In progress
+**Status:** Completed
 
 **Description:** 增加三类 Issue 表单，随后对完整展示候选运行文档安全、代码回归、依赖审计和构建检查，形成可提交 PR 的发布候选。
 
@@ -289,6 +289,8 @@ Task 1
 - [ ] 人工批准 PR 合并、仓库重命名和 Social Preview 上传后才进入外部状态变更
 
 ## Task 8: 完成 GitHub 品牌迁移并回查公开状态
+
+**Status:** Awaiting explicit external-change authorization
 
 **Description:** 在用户明确批准并合并展示 PR 后，将仓库重命名为 `ai-edu-media-tracker`，设置可发现性元数据和 Social Preview，并逐项验证安全控制、Release 与匿名访问未回归。
 
