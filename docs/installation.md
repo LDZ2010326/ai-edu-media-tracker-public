@@ -50,18 +50,19 @@ sh scripts/install-skill.sh uninstall claude
 ### 安装
 
 ```bash
+# 可选：export CODEX_HOME="/absolute/path/to/codex-home"
 sh scripts/install-skill.sh install codex
 ```
 
 安装器拒绝覆盖已有同名路径，并写入项目专用 ownership marker，供安全卸载时核验。
 
-如果你显式配置了自定义 Codex home，请把上述 `$HOME/.codex` 替换为该目录；不要同时维护两份
-Skill，以免加载旧版本。
+如果你配置了绝对路径形式的 `CODEX_HOME`，安装器会使用其 `skills` 子目录；否则使用
+`$HOME/.codex/skills`。不要同时维护两份 Skill，以免加载旧版本。
 
 ### 验证
 
 ```bash
-test -s "$HOME/.codex/skills/ai-edu-media-tracker/SKILL.md"
+test -s "${CODEX_HOME:-$HOME/.codex}/skills/ai-edu-media-tracker/SKILL.md"
 ```
 
 重新启动 Codex 后，可以使用 `$ai-edu-media-tracker`，或提出“抓取今天的国内 AI 教育资讯并

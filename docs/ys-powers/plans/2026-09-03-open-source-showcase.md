@@ -421,6 +421,76 @@ Issue 或 PR 披露；不发布未经用户授权的个人邮箱。
 
 **Dependencies:** Task 11
 
+## Task 13: 支持自定义 CODEX_HOME
+
+**Status:** Completed
+
+**Description:** 修复安装器固定写入 `$HOME/.codex`、与安装文档承诺的自定义 Codex home 不一致。
+
+**Files:**
+- Modify: `scripts/install-skill.sh`
+- Modify: `docs/installation.md`
+- Modify: `tests/security/test_repository_showcase.py`
+
+**Acceptance criteria:**
+- [ ] 未设置 `CODEX_HOME` 时仍使用 `$HOME/.codex`。
+- [ ] 设置绝对 `CODEX_HOME` 时，安装、验证与卸载均使用其 `skills` 子目录。
+- [ ] 文档给出与安装器一致的环境变量方式，不再要求替换不存在的命令文本。
+
+**Verification:**
+- [ ] RED: 隔离测试证明设置 `CODEX_HOME` 后仍错误写入 `$HOME/.codex`。
+- [ ] GREEN: 默认与自定义路径生命周期测试均通过。
+- [ ] Regression: Skill 安装安全测试与 Ruff 通过。
+
+**Dependencies:** Task 10
+
+## Task 14: 将用户级 CLI 安装绑定到锁定依赖
+
+**Status:** In progress
+
+**Description:** 修复 `uv tool install .` 独立解析最新依赖、绕过仓库已审计 `uv.lock` 的问题。
+
+**Files:**
+- Create: `requirements-cli.lock`
+- Modify: `docs/installation.md`
+- Modify: `tests/security/test_repository_showcase.py`
+
+**Acceptance criteria:**
+- [ ] 从 `uv.lock` 导出不包含项目自身的生产依赖锁文件并提交。
+- [ ] `uv tool install` 使用该文件约束/补充全部运行时依赖。
+- [ ] 隔离安装后的版本与锁文件一致，裸 CLI 在项目外可用。
+- [ ] 锁文件可由明确命令从 `uv.lock` 重建。
+
+**Verification:**
+- [ ] RED: 安装文档当前未引用任何锁定 requirements 文件。
+- [ ] GREEN: 隔离 tool 安装、版本核对、doctor 与卸载通过。
+- [ ] Regression: `uv lock --check`、安装契约测试与依赖审计通过。
+
+**Dependencies:** Task 13
+
+## Task 15: 消除 secret scanner 整文件盲区
+
+**Status:** Pending
+
+**Description:** 移除扫描器对自身和完整契约测试文件的排除，通过拆分刻意假值避免误报。
+
+**Files:**
+- Modify: `scripts/scan-public-secrets.py`
+- Modify: `tests/contract/test_cli.py`
+- Modify: `tests/security/test_repository_showcase.py`
+
+**Acceptance criteria:**
+- [ ] 扫描器自身进入当前树和历史扫描。
+- [ ] `tests/contract/test_cli.py` 不再整文件排除，刻意路径样例不形成真实匹配串。
+- [ ] 测试夹具目录仍以显式前缀排除，且新增任意普通测试文件泄露都会失败。
+
+**Verification:**
+- [ ] RED: 测试确认现有 `EXCLUDED_PATHS` 形成盲区。
+- [ ] GREEN: 当前树、全部历史和注入测试通过且不回显值。
+- [ ] Regression: 完整测试、Ruff、Mypy、Bandit、pip-audit、build 与 diff check 通过。
+
+**Dependencies:** Task 14
+
 ## Checkpoint: 公开发布完成
 
 - [ ] Task 8 的全部验收标准通过

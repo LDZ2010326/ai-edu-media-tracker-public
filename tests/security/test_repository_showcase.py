@@ -204,6 +204,36 @@ def test_skill_installer_refuses_collisions_and_requires_ownership_marker(
         assert not target.exists()
 
 
+def test_skill_installer_honors_custom_codex_home(tmp_path: Path) -> None:
+    installer = ROOT / "scripts" / "install-skill.sh"
+    custom_codex_home = tmp_path / "custom-codex"
+    environment = {
+        **os.environ,
+        "HOME": str(tmp_path / "home"),
+        "CODEX_HOME": str(custom_codex_home),
+    }
+    subprocess.run(  # noqa: S603 - fixed repository script and host
+        ["/bin/sh", str(installer), "install", "codex"],
+        cwd=ROOT,
+        env=environment,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    target = custom_codex_home / "skills" / "ai-edu-media-tracker"
+    assert (target / "SKILL.md").is_file()
+    assert not (tmp_path / "home" / ".codex").exists()
+    subprocess.run(  # noqa: S603 - fixed repository script and host
+        ["/bin/sh", str(installer), "uninstall", "codex"],
+        cwd=ROOT,
+        env=environment,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert not target.exists()
+
+
 def test_assets_have_expected_dimensions_and_no_remote_dependencies() -> None:
     social = ROOT / "assets" / "brand" / "social-preview.png"
     report = ROOT / "assets" / "demo" / "report-preview.png"

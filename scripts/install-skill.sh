@@ -11,7 +11,13 @@ mode=$1
 host=$2
 case "$host" in
   claude) skill_parent="${HOME:?HOME is required}/.claude/skills" ;;
-  codex) skill_parent="${HOME:?HOME is required}/.codex/skills" ;;
+  codex)
+    codex_home=${CODEX_HOME:-"${HOME:?HOME is required}/.codex"}
+    case "$codex_home" in
+      /*) skill_parent="$codex_home/skills" ;;
+      *) echo "CODEX_HOME must be an absolute path" >&2; exit 2 ;;
+    esac
+    ;;
   *) echo "unsupported host: $host" >&2; exit 2 ;;
 esac
 
