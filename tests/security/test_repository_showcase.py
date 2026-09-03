@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import struct
 from hashlib import sha256
 from pathlib import Path
 
@@ -70,6 +71,33 @@ def test_installation_guide_has_three_verified_routes_and_uninstall_steps() -> N
     assert "ai-edu-media-tracker-public" not in guide
     assert "pip install ai-edu-media-tracker" not in guide
     assert "自动发布" not in guide
+
+
+def test_assets_have_expected_dimensions_and_no_remote_dependencies() -> None:
+    social = ROOT / "assets" / "brand" / "social-preview.png"
+    report = ROOT / "assets" / "demo" / "report-preview.png"
+    logo = ROOT / "assets" / "brand" / "logo.svg"
+    workflow = ROOT / "assets" / "demo" / "workflow.svg"
+    for path in (social, report, logo, workflow):
+        assert path.is_file(), f"missing showcase asset: {path.relative_to(ROOT)}"
+
+    def png_size(path: Path) -> tuple[int, int]:
+        payload = path.read_bytes()
+        assert payload.startswith(b"\x89PNG\r\n\x1a\n")
+        return struct.unpack(">II", payload[16:24])
+
+    assert png_size(social) == (1280, 640)
+    report_width, report_height = png_size(report)
+    assert report_width >= 1200
+    assert report_height >= 700
+    for path in (logo, workflow):
+        svg = path.read_text(encoding="utf-8")
+        assert "<script" not in svg.lower()
+        assert re.search(r"(?:href|src)=[\"']https?://", svg, flags=re.IGNORECASE) is None
+    for path in (social, report):
+        payload = path.read_bytes()
+        for marker in (b"/Users/", b"/home/", b"FEISHU_", b"cli_"):
+            assert marker not in payload
 
 
 def test_public_showcase_does_not_contain_credential_shaped_values_or_local_paths() -> None:

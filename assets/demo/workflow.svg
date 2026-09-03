@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">AI 教育资讯报告工作流程</title>
+  <desc id="desc">多知、多鲸和芥末堆经过安全抓取进入证据包，再生成带来源的报告，并可由用户选择发布到飞书</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0 0L9 3L0 6Z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="360" rx="28" fill="#f8fafc"/>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif">
+    <text x="60" y="62" font-size="24" font-weight="700" fill="#0f172a">公开媒体</text>
+    <g font-size="22" fill="#134e4a" text-anchor="middle">
+      <rect x="50" y="92" width="180" height="58" rx="14" fill="#ccfbf1"/><text x="140" y="129">多知</text>
+      <rect x="50" y="165" width="180" height="58" rx="14" fill="#ccfbf1"/><text x="140" y="202">多鲸</text>
+      <rect x="50" y="238" width="180" height="58" rx="14" fill="#ccfbf1"/><text x="140" y="275">芥末堆</text>
+    </g>
+    <path d="M250 194H355" stroke="#64748b" stroke-width="4" marker-end="url(#arrow)"/>
+    <rect x="380" y="125" width="210" height="138" rx="22" fill="#0f766e"/>
+    <text x="485" y="180" font-size="24" font-weight="700" fill="#fff" text-anchor="middle">安全抓取</text>
+    <text x="485" y="216" font-size="18" fill="#ccfbf1" text-anchor="middle">固定来源 · 有界响应</text>
+    <path d="M610 194H690" stroke="#64748b" stroke-width="4" marker-end="url(#arrow)"/>
+    <rect x="715" y="125" width="190" height="138" rx="22" fill="#164e63"/>
+    <text x="810" y="180" font-size="24" font-weight="700" fill="#fff" text-anchor="middle">证据包</text>
+    <text x="810" y="216" font-size="18" fill="#cffafe" text-anchor="middle">文章 ID · 来源 · 时间</text>
+    <path d="M925 194H985" stroke="#64748b" stroke-width="4" marker-end="url(#arrow)"/>
+    <rect x="1010" y="102" width="150" height="92" rx="18" fill="#f59e0b"/>
+    <text x="1085" y="158" font-size="22" font-weight="700" fill="#451a03" text-anchor="middle">引用报告</text>
+    <path d="M1085 210V250" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="1010" y="270" width="150" height="52" rx="14" fill="#e2e8f0"/>
+    <text x="1085" y="303" font-size="18" fill="#334155" text-anchor="middle">可选：飞书</text>
+  </g>
+</svg>

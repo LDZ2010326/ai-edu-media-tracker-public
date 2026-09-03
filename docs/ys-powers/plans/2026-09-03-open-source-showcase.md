@@ -140,7 +140,7 @@ Task 1
 
 ## Task 4: 创建静态 Demo 与品牌资产
 
-**Status:** In progress
+**Status:** Completed
 
 **Description:** 根据同版示例报告创建报告预览、文字等价流程图、最小 Logo 和 Social Preview，使图片加载成功时增强理解、加载失败时不阻断主路径。
 
@@ -173,6 +173,8 @@ Task 1
 **Estimated scope:** M
 
 ## Task 5: 重构中英文产品入口
+
+**Status:** In progress
 
 **Description:** 将 README 重构为产品结果优先的中文主入口，并提供结构、命令、功能和限制等价的英文版本。
 

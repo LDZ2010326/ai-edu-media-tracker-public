@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">AI Education Media Tracker logo</title>
+  <desc id="desc">Three source cards flow into a cited report</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#164e63"/>
+    </linearGradient>
+  </defs>
+  <rect width="160" height="160" rx="36" fill="url(#bg)"/>
+  <path d="M36 43h50a8 8 0 0 1 8 8v8H52a8 8 0 0 0-8 8v48h-8a8 8 0 0 1-8-8V51a8 8 0 0 1 8-8Z" fill="#99f6e4" opacity=".9"/>
+  <rect x="50" y="61" width="82" height="62" rx="10" fill="#fff"/>
+  <path d="M66 80h50M66 94h42M66 108h30" stroke="#0f766e" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="119" cy="108" r="8" fill="#f59e0b"/>
+</svg>
