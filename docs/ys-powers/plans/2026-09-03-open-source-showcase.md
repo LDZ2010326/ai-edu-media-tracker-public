@@ -215,7 +215,7 @@ Task 1
 
 ## Task 6: 补齐社区贡献入口
 
-**Status:** In progress
+**Status:** Completed
 
 **Description:** 提供最小而完整的贡献、行为规范、Roadmap 和结构化 Issue 入口，使新用户可以报告 Bug、建议功能或反馈数据源异常。
 
@@ -248,6 +248,8 @@ Task 1
 **Estimated scope:** S
 
 ## Task 7: 提供结构化 Issue 表单并完成本地发布候选验收
+
+**Status:** In progress
 
 **Description:** 增加三类 Issue 表单，随后对完整展示候选运行文档安全、代码回归、依赖审计和构建检查，形成可提交 PR 的发布候选。
 

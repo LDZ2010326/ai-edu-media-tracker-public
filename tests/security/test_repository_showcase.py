@@ -52,6 +52,28 @@ def test_readmes_link_languages_demo_example_and_install_routes() -> None:
     assert command_pattern.findall(chinese) == command_pattern.findall(english)
 
 
+def test_community_docs_define_safe_contribution_routes() -> None:
+    contribution = (ROOT / "CONTRIBUTING.md").read_text(encoding="utf-8")
+    conduct = (ROOT / "CODE_OF_CONDUCT.md").read_text(encoding="utf-8")
+    roadmap = (ROOT / "docs" / "roadmap.md").read_text(encoding="utf-8")
+    pull_request = (ROOT / ".github" / "pull_request_template.md").read_text(
+        encoding="utf-8"
+    )
+
+    for marker in ("uv sync --locked", "uv run --extra dev pytest -q", "Pull Request"):
+        assert marker in contribution
+    assert "Private Vulnerability Reporting" in contribution
+    assert "security/advisories/new" in contribution
+    assert "公开 Issue" in contribution
+    assert "security/advisories/new" in conduct
+    assert "TODO" not in conduct
+    for heading in ("## 近期方向", "## 未来探索", "## 明确非目标"):
+        assert heading in roadmap
+    assert re.search(r"\b20\d{2}[-/]\d{1,2}[-/]\d{1,2}\b", roadmap) is None
+    for item in ("测试证据", "文档", "安全影响", "来源与版权"):
+        assert item in pull_request
+
+
 def test_sample_report_has_traceable_short_entries() -> None:
     report_path = ROOT / "examples" / "sample-report.md"
     assert report_path.is_file(), "sample report must be published"
