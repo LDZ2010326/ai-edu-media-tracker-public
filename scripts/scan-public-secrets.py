@@ -21,24 +21,25 @@ PATTERNS = (
     ),
 )
 BINARY_SUFFIXES = {".gif", ".ico", ".jpeg", ".jpg", ".pdf", ".png", ".pyc", ".whl"}
-EXCLUDED_PATHS = {
-    "scripts/scan-public-secrets.py",  # Contains the detection expressions themselves.
-    "tests/contract/test_cli.py",  # Contains a deliberate fake local path assertion.
-}
 EXCLUDED_PREFIXES = ("tests/fixtures/",)
+SAFE_LITERAL_REPLACEMENTS = {
+    # Historical test fixture retained in old blobs; built in pieces so this scanner scans itself.
+    "tests/contract/test_cli.py": (b"/" + b"Users/private/socket",),
+}
 
 
 def _included(path: str) -> bool:
     return (
-        path not in EXCLUDED_PATHS
-        and not path.startswith(EXCLUDED_PREFIXES)
+        not path.startswith(EXCLUDED_PREFIXES)
         and Path(path).suffix.lower() not in BINARY_SUFFIXES
     )
 
 
-def _has_secret(payload: bytes) -> bool:
+def _has_secret(path: str, payload: bytes) -> bool:
     if b"\0" in payload:
         return False
+    for fixture in SAFE_LITERAL_REPLACEMENTS.get(path, ()):
+        payload = payload.replace(fixture, b"<known-test-fixture>")
     return any(pattern.search(payload) for pattern in PATTERNS)
 
 
@@ -55,7 +56,7 @@ def _current_findings(git: str, repo: Path) -> list[str]:
         if not raw_path:
             continue
         path = raw_path.decode("utf-8", errors="surrogateescape")
-        if _included(path) and _has_secret((repo / path).read_bytes()):
+        if _included(path) and _has_secret(path, (repo / path).read_bytes()):
             findings.append(f"working tree: {path}")
     return findings
 
@@ -75,7 +76,7 @@ def _history_findings(git: str, repo: Path) -> list[str]:
             if _included(path):
                 blobs.add((blob, path))
     for blob, path in sorted(blobs):
-        if _has_secret(_git(git, repo, "cat-file", "blob", blob)):
+        if _has_secret(path, _git(git, repo, "cat-file", "blob", blob)):
             findings.append(f"history blob {blob[:12]}: {path}")
     return findings
 

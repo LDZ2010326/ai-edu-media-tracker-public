@@ -49,7 +49,8 @@ def test_cli_does_not_echo_local_path_from_network_failure(
             bundle = _failed_bundle()
             bundle.source_results[0].errors.append(
                 FetchError(
-                    kind=ErrorKind.NETWORK, message="permission denied: /Users/private/socket"
+                    kind=ErrorKind.NETWORK,
+                    message="permission denied: /" "Users/private/socket",
                 )
             )
             return bundle
@@ -57,7 +58,7 @@ def test_cli_does_not_echo_local_path_from_network_failure(
     monkeypatch.setattr(cli, "Fetcher", StubFetcher)  # type: ignore[attr-defined]
     result = runner.invoke(cli.app, ["fetch", "--output", str(tmp_path / "evidence.json")])
     assert result.exit_code == 4
-    assert "/Users/private" not in result.output
+    assert "/" "Users/private" not in result.output
 
 
 def test_validate_rejects_oversized_evidence_before_json_parsing(tmp_path: Path) -> None:

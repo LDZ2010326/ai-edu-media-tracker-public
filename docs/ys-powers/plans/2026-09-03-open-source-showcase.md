@@ -470,7 +470,7 @@ Issue 或 PR 披露；不发布未经用户授权的个人邮箱。
 
 ## Task 15: 消除 secret scanner 整文件盲区
 
-**Status:** In progress
+**Status:** Completed
 
 **Description:** 移除扫描器对自身和完整契约测试文件的排除，通过拆分刻意假值避免误报。
 
