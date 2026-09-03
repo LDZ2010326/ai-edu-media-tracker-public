@@ -491,6 +491,30 @@ Issue 或 PR 披露；不发布未经用户授权的个人邮箱。
 
 **Dependencies:** Task 14
 
+## Task 16: 消除基于路径和后缀的扫描绕过
+
+**Status:** Completed
+
+**Description:** 修复攻击者可把凭证放入 `tests/fixtures/`，或给纯文本/混合二进制使用
+`.png`、`.pdf` 等后缀来绕过当前树与历史扫描的问题。
+
+**Files:**
+- Modify: `scripts/scan-public-secrets.py`
+- Modify: `tests/security/test_repository_showcase.py`
+
+**Acceptance criteria:**
+- [ ] 所有 tracked blob 均按原始字节扫描，不信任目录或扩展名。
+- [ ] 含 NUL 的二进制 payload 中出现凭证形态时仍被识别。
+- [ ] 仅对历史中已知、精确的刻意假值执行路径限定替换。
+- [ ] 当前图片、fixtures、源码和完整历史无误报。
+
+**Verification:**
+- [ ] RED: 在临时仓库的 `tests/fixtures/leak.png` 写入含 NUL 的凭证后当前扫描器漏报。
+- [ ] GREEN: 注入路径同时在 current tree 和 history 报告，且不回显凭证值。
+- [ ] Regression: 完整门禁通过。
+
+**Dependencies:** Task 15
+
 ## Checkpoint: 公开发布完成
 
 - [ ] Task 8 的全部验收标准通过
